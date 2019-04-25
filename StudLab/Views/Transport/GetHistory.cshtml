@@ -1,0 +1,57 @@
+﻿@model IEnumerable<StudLab.Model.TableTransportTask>
+@{ 
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+<div class="item-history" id="@item.Id" onclick="selectTable(@item.Id)">
+    <table class="table-center">
+        @{
+            var table = item.toList();
+            var AVector = item.GetAVector();
+            var BVector = item.GetBVector();
+        }
+        <tbody>
+            <tr>
+                <td align="center">
+                    <b>Матрица тарифов, c<sub>ij</sub></b>
+                    <table>
+                        <tbody>
+                            @for (int i = 0; i < item.NumRow; i++)
+                            {
+                                <tr>
+                                    <td> </td>
+                                    @for (int j = 0; j < item.NumColumn; j++)
+                                    {
+                                        <td><input class="form-control" type="text" name="m@(i + 1)@(j + 1)" value="@table[i][j]" disabled></td>
+                                    }
+                                </tr>
+                            }
+                            <tr>
+                                <td><strong>Потребности</strong>, b<sub>j</sub></td>
+                                @for (int i = 0; i < item.NumColumn; i++)
+                                {
+                                    <td><input class="form-control inputb" type="text" name="fx@(i + 1)" value="@BVector[i]" disabled></td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <b>Запасы, a<sub>i</sub></b>
+                    <table>
+                        <tbody>
+                            @for (int i = 0; i < item.NumRow; i++)
+                            {
+                                <tr><td><input class="form-control inputb" type="text" name="r@(i + 1)" value="@AVector[i]" disabled></td></tr>
+                            }
+                            <tr><td class="form-control">&nbsp;</td></tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+}

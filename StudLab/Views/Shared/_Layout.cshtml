@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StudLabs</title>
+
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
+
+    <!-- jQuery -->
+    <script src="~/lib/jquery.js"></script>
+    <!-- Bootstrap4 -->
+    <link rel="stylesheet" href="~/lib/bootstrap4/css/bootstrap.min.css">
+    <script src="~/lib/bootstrap4/js/bootstrap.min.js"></script>
+
+
+    <!-- FontAwesome  -->
+    <link href="~/lib/fontawesome-free-5.8.1/css/all.min.css" rel="stylesheet">
+    <!-- DataTable -->
+    <link rel="stylesheet" type="text/css" href="~/lib/DataTables-Test/datatables.min.css" />
+
+    <script type="text/javascript" src="~/lib/DataTables-Test/datatables.min.js"></script>
+
+
+    <!-- Select2 -->
+    <link href="~/lib/select2-4.0.5/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="~/lib/select2-4.0.5/dist/js/select2.min.js"></script>
+
+    <!-- CSS SITE -->
+    <link rel="stylesheet" href="~/css/_Layout.css" />
+
+    <!-- Spinner -->
+    <link rel="stylesheet" href="~/node_modules/spin.js/spin.css" />
+    <script src="~/node_modules/spin.js/spin.js"></script>
+
+
+
+</head>
+<body>
+    <!--NEW  -->
+    <input type="checkbox" id="nav-toggle" hidden>
+
+    <nav class="navigation hover-menu">
+
+        <div class="container">
+            <div class="menu-header">
+                <a href="#" class="col-12 name-company">
+                    <img src="~/images/testImage.png">
+                    <span class="name-section">Name Company</span>
+                </a>
+                <a href="/Account" class="col-12 name-user">
+                    <img src="~/images/testImage.png">
+                    <span class="name-section">Name User</span>
+                </a>
+
+
+            </div>
+            <div class="navigation-collapse">
+                <ul id="menu">
+                    <li>
+                        <a href="/">
+                            <i class="fas fa-home"></i>
+                            <span class="name-section">На главную</span>
+                        </a>
+                    </li>
+                    <li class="sub">
+                        <a href="#">
+                            <i class="fas fa-book-open"></i>
+                            <span class="name-section">Пункт 1</span>
+                            <b class="carret"></b>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#">Ссылка 3-1</a></li>
+                            <li><a href="#">Ссылка 3-1</a></li>
+                            <li><a href="#">Ссылка 3-1</a></li>
+                            <li><a href="#">Ссылка 3-1</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub">
+                        <a>
+                            <i class="fas fa-book-open"></i>
+                            <span class="name-section">Пункт 2</span>
+                            <b class="carret"></b>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="#">Техника</a></li>
+                            <li><a href="#">Ссылка 3-1</a></li>
+                            <li><a href="#">Ссылка 3-1</a></li>
+                            <li><a href="#">Ссылка 3-1</a></li>
+                        </ul>
+                    </li>
+                    <li class="sub">
+                        <a>
+                            <i class="fas fa-book-open"></i>
+                            <span class="name-section">Калькулятор</span>
+                            <b class="carret"></b>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><a href="/Transport">Транспортная задача</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mask-content"></div>
+
+    </nav>
+    <header class="n-navigation">
+        <div class="container-fluid row justify-content-between">
+            <div class="navbar-wrapper">
+                <!-- <div class="nav-toggle"></div> -->
+                <label for="nav-toggle" class="nav-toggle" onclick></label>
+                <a href="" id="name-site">
+                    <span>StudLabs</span>
+                </a>
+            </div>
+            <div class="header-content row d-none d-md-flex ">
+                <!-- <div class="search-group row justify-content-center">
+                    <input type="text">
+                    <div class="search-icon stub">
+                        <span>
+                        </span>
+                    </div>
+                </div> -->
+                <ul class="row ">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+
+            </div>
+        </div>
+
+
+    </header>
+    <!-- The Modal -->
+    <div id="modal-dialog" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header row justify-content-between">
+                <span>Создание записи</span>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+
+    <div id="page-layout" class="row n-navigation">
+        <div id="page-body" class=" col-12">
+            <div class="container-body body-content">
+                <div class="container-table ">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <footer class="d-flex  justify-content-center">
+        <p>© 2019 - StudLabs</p>
+    </footer>
+
+
+    <script src="~/js/_Layout.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+<form id="transport-step-1" action="#" method="POST">
+    <div class="form-group">
+        <label class="control-label">Количество столбцов (магазины):</label>
+        <select name="column" size="1">
+            <option value="2" selected>2</option>
+            @for (int i = 3; i < 16; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Количество строк (поставщики):</label>
+        <select name="row" size="1">
+            <option value="2" selected>2</option>
+            @for (int i = 3; i < 16; i++)
+            {
+                <option value="@i">@i</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="submit" name="STEP1" value="Далее" class="btn btn-lg btn-primary" onclick="step1(this.form)">
+    </div>
+</form>

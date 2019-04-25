@@ -1,0 +1,60 @@
+.form-group{
+    position: relative;
+}
+#history-user, .container-table{
+    margin-right: 0;
+    padding: 0;
+}
+#history-user{
+    /* background-color: green; */
+    /* border: 1px solid sienna; */
+    border-radius: 5px;
+    position: absolute;
+    min-width: 700px;
+    max-width: 700px;
+    min-height: 400px;
+    max-height: 400px;
+    right: 0px;
+    /* display: table; */
+    /* overflow-y: scroll; Добавляем полосы прокрутки */
+    z-index: 1050;
+    background: rgb(255, 255, 255);
+    margin-top: 3px;
+    display: none;
+}
+#body-history{
+    height:100%;
+}
+.header-history {
+    line-height: 40px;
+    background-color: rgb(236, 236, 236);
+    text-align: center;
+    font-weight: 900;
+}
+.mini-table{
+    font-size: 6px;
+}
+.item-history{
+    /* margin: 0 0 10px 0;   */
+    padding: 20px 10px;
+    border-bottom: 1px solid silver;
+}
+.item-history *{
+    cursor: pointer;
+}
+.item-history:hover{
+    background-color: aliceblue;
+}
+.relative{
+    position: relative;
+    overflow-y: scroll; /* Добавляем полосы прокрутки */
+    /* max-height: 100%; */
+    max-height: 400px;
+    height: 400px;
+}
+.all-history-btn{
+    position: absolute;
+    z-index: 1050;
+    right: 5px;
+    top:5px;
+}

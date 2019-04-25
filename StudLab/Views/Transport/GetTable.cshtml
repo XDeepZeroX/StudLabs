@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = "_Transport";
+    int row = ViewBag.row;
+    int column = ViewBag.column;
+    TempData["NumRow"] = row;
+    TempData["NumColumn"] = column;
+    TempData["fromDb"] = false;
+}
+
+<table class="table-center">
+    <tbody>
+        <tr>
+            <td align="center">
+                <b>Матрица тарифов, c<sub>ij</sub></b>
+                <table>
+                    <tbody>
+                        @for (int i = 0; i < row; i++)
+                        {
+                            <tr>
+                                <td> </td>
+                                @for (int j = 0; j < column; j++)
+                                {
+                                    <td><input class="form-control" type="text" name="m@(i+1)@(j + 1)" value="0"></td>
+                                }
+                            </tr>
+                        }
+                        <tr>
+                            <td><strong>Потребности</strong>, b<sub>j</sub></td>
+                            @for (int i = 0; i < column; i++)
+                            {
+                                <td><input class="form-control inputb" type="text" name="fx@(i+1)" value="0"></td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <b>Запасы, a<sub>i</sub></b>
+                <table>
+                    <tbody>
+                        @for (int i = 0; i < row; i++)
+                        {
+                            <tr><td><input class="form-control inputb" type="text" name="r@(i+1)" value="0"></td></tr>
+                        }
+                        <tr><td class="form-control">&nbsp;</td></tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

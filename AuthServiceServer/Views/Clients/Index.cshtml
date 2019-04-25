@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AuthServiceServer.Models.Clients.ClientToView>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ClientId)</th>
+            <th>@Html.DisplayNameFor(model => model.ClientName)</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { ClientName = item.ClientName })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

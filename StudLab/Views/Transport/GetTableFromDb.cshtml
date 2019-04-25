@@ -1,0 +1,56 @@
+﻿@model StudLab.Model.TableTransportTask
+@{
+    Layout = "_Transport";
+    var table = Model.toList();
+    var AVector = Model.GetAVector();
+    var BVector = Model.GetBVector();
+    TempData["NumRow"] = Model.NumRow;
+    TempData["NumColumn"] = Model.NumColumn;
+    TempData["fromDb"] = true;
+}
+
+
+<input class="form-control" type="text" name="idTable" value="@Model.Id" hidden>
+<table class="table-center">
+    <tbody>
+        <tr>
+            <td align="center">
+                <b>Матрица тарифов, c<sub>ij</sub></b>
+                <table>
+                    <tbody>
+                        @for (int i = 0; i < Model.NumRow; i++)
+                        {
+                            <tr>
+                                <td> </td>
+                                @for (int j = 0; j < Model.NumColumn; j++)
+                                {
+                                    <td><input class="form-control" type="text" name="m@(i + 1)@(j + 1)" value="@table[i][j]"></td>
+                                }
+                            </tr>
+                        }
+                        <tr>
+                            <td><strong>Потребности</strong>, b<sub>j</sub></td>
+                            @for (int i = 0; i < Model.NumColumn; i++)
+                            {
+                                <td><input class="form-control inputb" type="text" name="fx@(i + 1)" value="@BVector[i]"></td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <b>Запасы, a<sub>i</sub></b>
+                <table>
+                    <tbody>
+                        @for (int i = 0; i < Model.NumRow; i++)
+                        {
+                            <tr><td><input class="form-control inputb" type="text" name="r@(i + 1)" value="@AVector[i]"></td></tr>
+                        }
+                        <tr><td class="form-control">&nbsp;</td></tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<span class="col-12">
+    Заполните матрицу тарифов, выберите метод нахождения начального плана. Нажмите Далее.<br />
+</span>
+<span class="col-12">
+    <b>Примечание:</b> если заданы запреты на перемещение из i-го пункта в j-ый (прочерк "-" или М) в качестве стоимости достаточно указать максимальное значение тарифа.
+</span>
+<form action="#" method="POST">
+    <input class="form-control" type="text" name="row" value="@TempData["NumRow"]" hidden>
+    <input class="form-control" type="text" name="column" value="@TempData["NumColumn"]" hidden>
+    <input class="form-control" type="text" name="fromDb" value="@TempData["fromDb"].ToString()" hidden>
+    @RenderBody()
+    <p>
+        <strong>Метод нахождения первого опорного плана</strong>
+        <select id="name-method" name="method" size="1" style="width: 200px">
+            <option value="NorthwestCorner">Северо-западного угла</option>
+            <option value="MSE" selected>Минимального элемента</option>
+        </select>
+    </p>
+    <p>
+        <strong>Метод оптимизации опорного плана</strong>
+        <select id="name-method" name="optimizer" size="1" style="width: 200px">
+            <option value="MethodCycles">Циклический метод</option>
+            <option value="MethodPotenc" selected>Метод потенциалов</option>
+            <option value="None">Без оптимизации</option>
+        </select>
+    </p>
+    <input type="submit" id="solve1" name="STEP1" value="Назад" class="btn btn-lg btn-primary solve1" onclick="step2back()"></input>
+    <input type="submit" id="solve2" name="STEP2" value="Далее" class="btn btn-lg btn-primary solve2" onclick="step2(this.form)">
+</form>
+<script>
+    // отправка формы
+    $("form").submit(function (e) {
+        e.preventDefault();
+    });
+</script>
+
