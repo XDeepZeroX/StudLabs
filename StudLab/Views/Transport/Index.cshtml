@@ -1,36 +1,9 @@
 ﻿
 @{
     ViewData["Title"] = "Транспортная  задача";
+    TempData["title-table"] = "Транспортная задача";
+    TempData["header-history"] = "История транспортной задачи";
+    Layout = "_Index";
 }
 
-
-<div class="x-title row justify-content-between">
-    <h4>
-        <i class="fa fa-table"></i>
-        <span class="title-table">Транспортная задача</span>
-    </h4>
-    @if (bool.Parse(TempData["IsAuthorize"].ToString()))
-    {
-        <link rel="stylesheet" href="~/css/history.css" />
-        <div class="form-group">
-            <a href="#" id="hisotry-btn" class="btn btn-info">История операций</a>
-            <div id="history-user" class="container-table ">
-                <div class="relative">
-                    <div class="all-history-btn"><a href="#" class="btn btn-info">Вся история</a></div>
-                    <div class="header-history col-12">История транспортной задачи</div>
-                    <div id="body-history" style="width: 100%;">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="~/js/history.js"></script>
-    }
-</div>
-<div id="content-task">
-    @Html.Partial("GenerateTable")
-</div>
-
-<script src="~/js/test.js"></script>
-
-
-<script src="~/js/Transport/index.js"></script>
+@Html.Partial("GenerateTable")

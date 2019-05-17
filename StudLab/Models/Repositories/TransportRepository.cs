@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace StudLab.Models.Repositories
 {
-    public class TransportRepository : AbstractTableRepository<TableTransportTask, TableTransportTask>
+    public class TransportRepository : AbstractTableRepository<TableTransportTask>
     {
         public TransportRepository(ApplicationDbContext db, IMapper mapper) : base(db, mapper)
         {

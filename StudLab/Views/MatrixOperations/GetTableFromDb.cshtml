@@ -1,0 +1,62 @@
+﻿@model StudLab.Models.TablesEntities.MatrixOperationTask
+@{
+    Layout = "_MatrixOperation";
+    var tableOne = Model.ToList();
+    var tableTwo = Model.GetMatrix(Model.TableTwo);
+
+    TempData["NumRow"] = Model.NumRow;
+    TempData["NumColumn"] = Model.NumColumn;
+
+    TempData["NumRowTwo"] = Model.NumRowTwo;
+    TempData["NumColumnTwo"] = Model.NumColumnTwo;
+    TempData["fromDb"] = true;
+}
+
+
+<input class="form-control" type="text" name="idTable" value="@Model.Id" hidden>
+<table class="table-center">
+    <tbody>
+        <tr>
+            <td align="center">
+                <b>Матрица №1</b>
+                <table>
+                    <tbody>
+                        @for (int i = 0; i < Model.NumRow; i++)
+                        {
+                            <tr>
+                                <td> </td>
+                                @for (int j = 0; j < Model.NumColumn; j++)
+                                {
+                                    <td><input class="form-control" type="text" name="matrixOne@(i+1)@(j + 1)" value="@tableOne[i][j]"></td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table class="table-center">
+    <tbody>
+        <tr>
+            <td align="center">
+                <b>Матрица №2</b>
+                <table>
+                    <tbody>
+                        @for (int i = 0; i < Model.NumRowTwo; i++)
+                        {
+                            <tr>
+                                <td> </td>
+                                @for (int j = 0; j < Model.NumColumnTwo; j++)
+                                {
+                                    <td><input class="form-control" type="text" name="matrixTwo@(i+1)@(j + 1)" value="@tableTwo[i][j]"></td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

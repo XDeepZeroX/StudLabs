@@ -16,7 +16,7 @@ namespace StudLab.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("StudLab.Model.TableTransportTask", b =>
@@ -44,7 +44,7 @@ namespace StudLab.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tables");
+                    b.ToTable("TransportTables");
                 });
 
             modelBuilder.Entity("StudLab.Model.User", b =>
@@ -58,13 +58,81 @@ namespace StudLab.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Transports");
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("StudLab.Models.TablesEntities.MatrixOperationTask", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("NumColumn");
+
+                    b.Property<int>("NumColumnTwo");
+
+                    b.Property<int>("NumRow");
+
+                    b.Property<int>("NumRowTwo");
+
+                    b.Property<string>("Table");
+
+                    b.Property<string>("TableTwo");
+
+                    b.Property<int?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("MatrixOperationTask");
+                });
+
+            modelBuilder.Entity("StudLab.Models.TablesEntities.MultiCriteriaTask", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("NumColumn");
+
+                    b.Property<int>("NumRow");
+
+                    b.Property<string>("Table");
+
+                    b.Property<int?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("MultiCriteriaTables");
                 });
 
             modelBuilder.Entity("StudLab.Model.TableTransportTask", b =>
                 {
                     b.HasOne("StudLab.Model.User", "User")
                         .WithMany("TransportTables")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("StudLab.Models.TablesEntities.MatrixOperationTask", b =>
+                {
+                    b.HasOne("StudLab.Model.User", "User")
+                        .WithMany("MatrixOperationTables")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("StudLab.Models.TablesEntities.MultiCriteriaTask", b =>
+                {
+                    b.HasOne("StudLab.Model.User", "User")
+                        .WithMany("MultiCriteriaTables")
                         .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618

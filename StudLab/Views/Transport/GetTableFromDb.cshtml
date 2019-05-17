@@ -1,7 +1,7 @@
 ﻿@model StudLab.Model.TableTransportTask
 @{
     Layout = "_Transport";
-    var table = Model.toList();
+    var table = Model.ToList();
     var AVector = Model.GetAVector();
     var BVector = Model.GetBVector();
     TempData["NumRow"] = Model.NumRow;
@@ -46,7 +46,7 @@
                         {
                             <tr><td><input class="form-control inputb" type="text" name="r@(i + 1)" value="@AVector[i]"></td></tr>
                         }
-                        <tr><td class="form-control">&nbsp;</td></tr>
+                        <tr><td><input class="form-control inputb" type="text" name="temp" disabled></td></tr>
                     </tbody>
                 </table>
             </td>

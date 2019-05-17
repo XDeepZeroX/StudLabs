@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string stringAuth = "авторизованы";
+    bool IsAuthenticated = Context.User.Identity.IsAuthenticated;
+    if (!IsAuthenticated) { stringAuth = "не " + stringAuth; }
+}
+
+<h4>Информация</h4>
+<hr />
+<dl class="dl-horizontal">
+    В данный момент вы @stringAuth
+    <br />
+    Вы можете:
+</dl>
+@if (!IsAuthenticated)
+{
+    <dl>
+        <dt>
+            @Html.ActionLink("Авторизоваться", "Login", "Account")
+        </dt>
+    </dl>
+    <dl>
+        <dt>
+            @Html.ActionLink("Зарегестрироваться", "Registration", "Account")
+        </dt>
+    </dl>
+}
+else
+{
+    <dl>
+        <dt>
+            @Html.ActionLink("Редактировать профиль", "Index", "Account")
+        </dt>
+    </dl>
+    <dl>
+        <dt>
+            @Html.ActionLink("Выйти", "Logout", "Account")
+        </dt>
+    </dl>
+}

@@ -1,0 +1,60 @@
+﻿@{
+    Layout = "_MatrixOperation";
+    int row = ViewBag.row;
+    int column = ViewBag.column;
+    int rowTwo = ViewBag.rowTwo;
+    int columnTwo = ViewBag.columnTwo;
+
+    TempData["NumRow"] = row;
+    TempData["NumColumn"] = column;
+    TempData["NumRowTwo"] = rowTwo;
+    TempData["NumColumnTwo"] = columnTwo;
+    TempData["fromDb"] = false;
+}
+
+<table class="table-center">
+    <tbody>
+        <tr>
+            <td align="center">
+                <b>Матрица №1</b>
+                <table>
+                    <tbody>
+                        @for (int i = 0; i < row; i++)
+                        {
+                        <tr>
+                            <td> </td>
+                            @for (int j = 0; j < column; j++)
+                                {
+                            <td><input class="form-control" type="text" name="matrixOne@(i+1)@(j + 1)" value="0"></td>
+                                }
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table class="table-center">
+    <tbody>
+        <tr>
+            <td align="center">
+                <b>Матрица №2</b>
+                <table>
+                    <tbody>
+                        @for (int i = 0; i < rowTwo; i++)
+                        {
+                        <tr>
+                            <td> </td>
+                            @for (int j = 0; j < columnTwo; j++)
+                                {
+                            <td><input class="form-control" type="text" name="matrixTwo@(i+1)@(j + 1)" value="0"></td>
+                                }
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

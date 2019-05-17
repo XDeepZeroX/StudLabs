@@ -1,9 +1,26 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var userName = Context.User.Claims.FirstOrDefault(x=>x.Type == "username")?.Value;
+    var userLink = "/Account";
+    var userImg = "user.jpg";
+if (userName == null)
+    {
+        userName = "Anonymous";
+        userLink = "/Account/Anonymous";
+        userImg = "Anonim.jpg";
+    }
+    else
+    {
+        userName = userName.Split('@')[0];
+    }
+
+    var privderOpenIdConnect = "OpenIdConnect";
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - StudLabs</title>
+    <title>StudLabs</title>
 
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
 
@@ -32,9 +49,6 @@
     <!-- Spinner -->
     <link rel="stylesheet" href="~/node_modules/spin.js/spin.css" />
     <script src="~/node_modules/spin.js/spin.js"></script>
-
-
-
 </head>
 <body>
     <!--NEW  -->
@@ -44,13 +58,13 @@
 
         <div class="container">
             <div class="menu-header">
-                <a href="#" class="col-12 name-company">
-                    <img src="~/images/testImage.png">
-                    <span class="name-section">Name Company</span>
-                </a>
-                <a href="/Account" class="col-12 name-user">
-                    <img src="~/images/testImage.png">
-                    <span class="name-section">Name User</span>
+                @*<a href="#" class="col-12 name-company">
+                        <img src="~/images/testImage.png">
+                        <span class="name-section">Name Company</span>
+                    </a>*@
+                <a href="@userLink" class="col-12 name-user">
+                    <img src="~/images/@userImg">
+                    <span class="name-section">@userName</span>
                 </a>
 
 
@@ -64,32 +78,6 @@
                         </a>
                     </li>
                     <li class="sub">
-                        <a href="#">
-                            <i class="fas fa-book-open"></i>
-                            <span class="name-section">Пункт 1</span>
-                            <b class="carret"></b>
-                        </a>
-                        <ul class="sub-menu">
-                            <li><a href="#">Ссылка 3-1</a></li>
-                            <li><a href="#">Ссылка 3-1</a></li>
-                            <li><a href="#">Ссылка 3-1</a></li>
-                            <li><a href="#">Ссылка 3-1</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub">
-                        <a>
-                            <i class="fas fa-book-open"></i>
-                            <span class="name-section">Пункт 2</span>
-                            <b class="carret"></b>
-                        </a>
-                        <ul class="sub-menu">
-                            <li><a href="#">Техника</a></li>
-                            <li><a href="#">Ссылка 3-1</a></li>
-                            <li><a href="#">Ссылка 3-1</a></li>
-                            <li><a href="#">Ссылка 3-1</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub">
                         <a>
                             <i class="fas fa-book-open"></i>
                             <span class="name-section">Калькулятор</span>
@@ -97,7 +85,22 @@
                         </a>
                         <ul class="sub-menu">
                             <li><a href="/Transport">Транспортная задача</a></li>
+                            <li><a href="/MultiCriteriaChoice">Многокритериальный<br /> выбор</a></li>
+                            <li><a href="/MatrixOperations">Операции <br />над матрицами</a></li>
                         </ul>
+                    </li>
+                    <hr />
+                    <li>
+                        <a href="/Account">
+                            <i class="fas fa-user-circle"></i>
+                            <span class="name-section">Профиль</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Account/SingOut">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span class="name-section">Выйти</span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -111,26 +114,26 @@
             <div class="navbar-wrapper">
                 <!-- <div class="nav-toggle"></div> -->
                 <label for="nav-toggle" class="nav-toggle" onclick></label>
-                <a href="" id="name-site">
+                <a href="/" id="name-site">
                     <span>StudLabs</span>
                 </a>
             </div>
-            <div class="header-content row d-none d-md-flex ">
-                <!-- <div class="search-group row justify-content-center">
-                    <input type="text">
-                    <div class="search-icon stub">
-                        <span>
-                        </span>
-                    </div>
-                </div> -->
-                <ul class="row ">
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                </ul>
+            @if (!Context.User.Identity.IsAuthenticated)
+            {
+                <div class="header-content row d-none d-md-flex ">
+                    <ul class="icon">
+                        @*[0] = "OpenIdConnect"*@
 
-            </div>
+                        <li><a asp-controller="Account" asp-action="SingIn" asp-route-provider="@privderOpenIdConnect" class="fab fa-openid"></a></li>
+                        @*<li><a href="/Account/LoginOpenId" class="fab fa-openid"></a></li>*@
+                        <li><a href="#" class="fab fa-facebook-f no-openid"></a></li>
+                        @*<li><a href="#" class="fab fa-twitter no-openid"></a></li>*@
+                        @*<li><a href="#" class="fab fa-instagram no-openid"></a></li>*@
+                        <li><a href="#" class="fab fa-vk no-openid"></a></li>
+                    </ul>
+
+                </div>
+            }
         </div>
 
 
@@ -164,6 +167,9 @@
     </footer>
 
 
+    <script>
+        let Controller = "@ViewData["controller"]";
+    </script>
     <script src="~/js/_Layout.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

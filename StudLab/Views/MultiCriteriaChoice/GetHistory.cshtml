@@ -1,0 +1,38 @@
+﻿@model IEnumerable<StudLab.Models.TablesEntities.MultiCriteriaTask>
+
+@{
+    Layout = TempData["layout"]?.ToString();
+    TempData["header-history"] = "История многокритериальной задачи";
+}
+
+@foreach (var item in Model)
+{
+    <div class="item-history" id="@item.Id" onclick="selectTable(@item.Id)">
+        <table class="table-center">
+            @{
+                var tableOne = item.GetMatrix(item.Table);
+            }
+            <tbody>
+                <tr>
+                    <td align="center">
+                        <b>Матрица №1<sub>ij</sub></b>
+                        <table>
+                            <tbody>
+                                @for (int i = 0; i < item.NumRow; i++)
+                                {
+                                    <tr>
+                                        <td> </td>
+                                        @for (int j = 0; j < item.NumColumn; j++)
+                                        {
+                                            <td><input class="form-control" type="text" name="m@(i + 1)@(j + 1)" value="@tableOne[i][j]" disabled></td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}

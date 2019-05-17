@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StudLab.Models.Repositories
 {
-    public class UserRepository : AbstractRepository<User, User>
+    public class UserRepository : AbstractRepository<User>
     {
         public UserRepository(ApplicationDbContext db, IMapper mapper) : base(db, mapper)
         {

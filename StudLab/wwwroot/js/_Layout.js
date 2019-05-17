@@ -1,7 +1,6 @@
 $(document).ready(function () {
     $("select").select2();
 
-
     $('#menu > li.sub > a').click(function () {
         $('#menu li ul').slideUp();
         if ($(this).next().is(":visible")) {
@@ -39,10 +38,6 @@ $(document).ready(function () {
             this.classList.remove("fa-sort-amount-down");
         }
     })
-    //initTable();
-
-
-
 // MENU
     /* Открытие меню */
     var main = function() { //главная функция
@@ -60,48 +55,8 @@ $(document).ready(function () {
             }, 300); //скорость движения меню в мс
             $('#menu li ul').slideUp(250);
             // $('.table').css({"width": $('.table').parent().width()});
-            $('.table').css({"width":"100%"});
-            
+            $('.table').css({"width":"100%"});            
         });
-
     };
-
     $(document).ready(main); //как только страница полностью загрузится, будет вызвана функция main, отвечающая за работу меню
-
-
-
-
 });
-let Table;
-function initTable() {
-    Table = $(".table").DataTable({
-            responsive: true,
-            fixedHeader:{
-                header:true
-            },
-            
-            select: 'single',
-            "language": {
-                "processing": "Подождите...",
-                "search": "Поиск:",
-                "lengthMenu": "Показать _MENU_ записей",
-                "info": "Записи с _START_ до _END_ из _TOTAL_ записей",
-                "infoEmpty": "Записи с 0 до 0 из 0 записей",
-                "infoFiltered": "(отфильтровано из _MAX_ записей)",
-                "infoPostFix": "",
-                "loadingRecords": "Загрузка записей...",
-                "zeroRecords": "Записи отсутствуют.",
-                "emptyTable": "В таблице отсутствуют данные",
-                "paginate": {
-                  "first": "Первая",
-                  "previous": "Предыдущая",
-                  "next": "Следующая",
-                  "last": "Последняя"
-                },
-                "aria": {
-                  "sortAscending": ": активировать для сортировки столбца по возрастанию",
-                  "sortDescending": ": активировать для сортировки столбца по убыванию"
-                }
-              }
-        });
-}

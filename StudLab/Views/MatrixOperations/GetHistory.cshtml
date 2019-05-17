@@ -1,0 +1,56 @@
+﻿@model IEnumerable<StudLab.Models.TablesEntities.MatrixOperationTask>
+
+@{
+    Layout = TempData["layout"]?.ToString();
+    TempData["header-history"] = "История операций с матрицами";
+}
+
+@foreach (var item in Model)
+{
+    <div class="item-history" id="@item.Id" onclick="selectTable(@item.Id)">
+        <table class="table-center">
+            @{
+                var tableOne = item.GetMatrix(item.Table);
+                var tableTwo = item.GetMatrix(item.TableTwo);
+            }
+            <tbody>
+                <tr>
+                    <td align="center">
+                        <b>Матрица №1<sub>ij</sub></b>
+                        <table>
+                            <tbody>
+                                @for (int i = 0; i < item.NumRow; i++)
+                                {
+                                    <tr>
+                                        <td> </td>
+                                        @for (int j = 0; j < item.NumColumn; j++)
+                                        {
+                                            <td><input style="background: #e6e5e5;" class="form-control" type="text" name="m@(i + 1)@(j + 1)" value="@tableOne[i][j]" disabled></td>
+                                        }
+                                    </tr>
+                                }                                
+                            </tbody>
+                        </table>
+                    </td>   
+                    <td align="center">
+                        <b>Матрица №2<sub>ij</sub></b>
+                        <table>
+                            <tbody>
+                                @for (int i = 0; i < item.NumRowTwo; i++)
+                                {
+                                    <tr>
+                                        <td> </td>
+                                        @for (int j = 0; j < item.NumColumnTwo; j++)
+                                        {
+                                            <td><input class="form-control" type="text" name="m@(i + 1)@(j + 1)" value="@tableTwo[i][j]" disabled></td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}

@@ -10,13 +10,11 @@ using System.Threading.Tasks;
 
 namespace StudLab.Model.Abstract
 {
-    public abstract class AbstractRepository<T, TViewModel> : IRepository<T, TViewModel>
+    public abstract class AbstractRepository<T> : IRepository<T>
         where T : BaseEntity
-        where TViewModel : BaseEntity
     {
         protected readonly ApplicationDbContext _db;
         protected readonly IMapper _mapper;
-        //public Expression<Func<T,bool>> lambda; //in T, out T
 
         public AbstractRepository(ApplicationDbContext db, IMapper mapper)
         {
@@ -62,10 +60,6 @@ namespace StudLab.Model.Abstract
         {
             return _db.Set<T>().AsQueryable();
         }
-        public List<TViewModel> GetView()
-        {
-            return _db.Set<T>().Select(x => _mapper.Map<TViewModel>(x)).ToList();
-        }
         public T Get(int id)
         {
             return _db.Set<T>().Find(id);
@@ -91,25 +85,7 @@ namespace StudLab.Model.Abstract
         //                                                   x.Title == Title);
         //}
 
-
-        //UPD
-        public bool Update(TViewModel entity)
-        {
-            try
-            {
-                var entityFromDB = _db.Set<T>().Find(entity.Id);
-                if (entityFromDB != null)
-                {
-                    entityFromDB = _mapper.Map(entity, entityFromDB);
-                    _db.SaveChanges();
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
+            
         public bool Update(T entity)
         {
             try
@@ -125,7 +101,7 @@ namespace StudLab.Model.Abstract
             }
 
         }
-        public async Task<bool> UpdateAsync(TViewModel entity)
+        public async Task<bool> UpdateAsync(T entity)
         {
             try
             {
@@ -143,7 +119,7 @@ namespace StudLab.Model.Abstract
                 return false;
             }
         }
-        public bool UpdateRange(IQueryable<TViewModel> entities)//Не проверено
+        public bool UpdateRange(IQueryable<T> entities)//Не проверено
         {
             try
             {
@@ -177,7 +153,7 @@ namespace StudLab.Model.Abstract
                 return false;
             }
         }
-        public bool Remove(TViewModel entity)
+        public bool Remove(T entity)
         {
             try
             {

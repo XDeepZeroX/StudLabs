@@ -1,14 +1,24 @@
 ﻿let historyIsOpen = false;
+var modal = document.getElementById("modal");
+var btn = document.getElementById("hisotry-btn");
+
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        historyIsOpen = false;
+    }
+}
+
 $("#hisotry-btn").click(() => {
     historyIsOpen = !historyIsOpen;
-    $('#history-user').slideToggle(100);
+    $('#modal').slideToggle(100);
 
     if (historyIsOpen) {
         var target = $('#body-history')[0];
         $(target).html("");
         var spinner = new Spinner(defaults).spin(target);
         $.ajax({
-            url: `/Transport/GetHistory`,
+            url: `/${Controller}/GetMainHistory`,
             type: 'GET',
             complete: function (result) {
                 console.log(result);
@@ -23,18 +33,22 @@ $("#hisotry-btn").click(() => {
 
 
 function selectTable(id) {
-    $('#history-user').slideUp(0);
+    $('#modal').slideUp(0);
     historyIsOpen = false;
     var target = $('#content-task')[0];
     var spinner = new Spinner(defaults).spin(target);
     $.ajax({
-        url: `/Transport/GetTableFromDb/${id}`,
+        url: `/${Controller}/GetTableFromDb/${id}`,
         type: 'GET',
         complete: function (result) {
             $('#content-task').html(result.responseText);
             //let modalBody = $(".modal-body")[0];
             //$(modalBody).html(result.responseText);
-            //openModal();
+            //openModal(); 
+            $("select").select2();
         }
     });
 }
+
+
+

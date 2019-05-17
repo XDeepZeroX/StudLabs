@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "_MultiCriteria";
+    int row = ViewBag.row;
+    int column = ViewBag.column;
+
+    TempData["NumRow"] = row;
+    TempData["NumColumn"] = column;
+    TempData["fromDb"] = false;
+}
+
+<table class="table-center">
+    <tbody>
+        <tr>
+            <td align="center">
+                <b>Матрица</b>
+                <table>
+                    <tbody>
+                        @for (int i = 0; i < row; i++)
+                        {
+                            <tr>
+                                <td> </td>
+                                @for (int j = 0; j < column; j++)
+                                {
+                                    <td><input class="form-control" type="text" name="m@(i+1)@(j + 1)" value="0"></td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

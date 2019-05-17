@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool IsAuthorize = Context.User.Identity.IsAuthenticated;
+}
+@*@Html.Partial()*@
+<div class="x-title row justify-content-between">
+    <h4>
+        <i class="fa fa-table"></i>
+        <span class="title-table">@TempData["title-table"]</span>
+    </h4>
+    @if (IsAuthorize)
+    {
+        <link rel="stylesheet" href="~/css/history.css" />
+        <div class="form-group">
+            <a href="#" id="hisotry-btn" class="btn btn-info">История операций</a>
+            <div id="modal">
+                <div id="history-user">
+                    @*<div class="relative">*@
+                    <div class="all-history-btn"><a href="/Account" class="btn btn-info">Вся история</a></div>
+                    <div class="header-history col-12">@TempData["header-history"]</div>
+                    <div id="body-history" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div id="content-task">
+    @RenderBody()
+</div>
+
+
+
+<script src="~/js/history.js"></script>
+<script src="~/js/index.js"></script>

@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using StudLab.Model;
+using StudLab.Models.TablesEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,9 @@ namespace StudLab.Data
         {
         }
 
-        public DbSet<TableTransportTask> Tables { get; set; }
-        public DbSet<User> Transports { get; set; }
+        public DbSet<TableTransportTask> TransportTables { get; set; }
+        public DbSet<MultiCriteriaTask> MultiCriteriaTables { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

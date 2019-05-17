@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = TempData["layout"]?.ToString();
+    TempData["title-table"] = "Многокритериальный выбор";
+}
+
+
+<span class="col-12">
+    Заполните матрицу многокритериального выбора, выберите метод[ы]. Нажмите Далее.<br />
+</span>
+<form action="#" method="POST">
+    <input class="form-control" type="text" name="row" value="@TempData["NumRow"]" hidden>
+    <input class="form-control" type="text" name="column" value="@TempData["NumColumn"]" hidden>
+    <input class="form-control" type="text" name="fromDb" value="@TempData["fromDb"].ToString()" hidden>
+    @RenderBody()
+    <p>
+        <strong>Метод нахождения первого опорного плана</strong>
+        <select id="name-method" name="method" multiple size="1" style="width: 200px">
+            <option value="MM">Минимаксный критерий</option>
+            <option value="BL" selected>Байеса-Лапласа</option>
+            <option value="S">Сэвиджа</option>
+            <option value="HW">Гурвица</option>
+            <option value="HL">Ходжа-Лемона</option>
+            <option value="G">Гермейера</option>
+            <option value="P">Критерий произведения</option>
+        </select>
+    </p>
+    <input type="submit" id="solve1" name="STEP1" value="Назад" class="btn btn-lg btn-primary solve1" onclick="step2back()"></input>
+    <input type="submit" id="solve2" name="STEP2" value="Далее" class="btn btn-lg btn-primary solve2" onclick="step2(this.form)">
+</form>
+<script>
+    // отправка формы
+    $("form").submit(function (e) {
+        e.preventDefault();
+    });
+</script>
+

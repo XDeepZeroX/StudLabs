@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AuthServiceServer.Models;
 using AuthServiceServer.Models.Data;
 using AuthServiceServer.Services;
+using AutoMapper;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using IdentityServer4.Services;
@@ -92,32 +93,27 @@ namespace AuthServiceServer
                 })
                 .AddAspNetIdentity<User>()
                 .AddProfileService<ClaimsProfileService>()
-                
-                ; 
-
-
+                .AddDeveloperSigningCredential(); 
+            
+            
             services.AddTransient<InitDataService>();
             
-
-
             //Для работы cookie в браузерах - но это не точно)
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context=>false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
-
-
-            if (Environment.IsDevelopment())
+            
+            //----------AutoMapper----------------
+            // Auto Mapper Configurations
+            var mappingConfig = new MapperConfiguration(mc =>
             {
-                builder.AddDeveloperSigningCredential();
-            }
-            else
-            {
-                throw new Exception("need to configure key material");
-            }
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

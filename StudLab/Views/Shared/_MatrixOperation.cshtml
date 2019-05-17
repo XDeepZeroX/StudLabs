@@ -1,0 +1,36 @@
+﻿@{
+    Layout = TempData["layout"]?.ToString();
+    TempData["title-table"] = "Операции над матрицами";
+}
+
+
+<span class="col-12">
+    Заполните матрицу многокритериального выбора, выберите метод[ы]. Нажмите Далее.<br />
+</span>
+<form action="#" method="POST">
+    <input class="form-control" type="text" name="row" value="@TempData["NumRow"]" hidden>
+    <input class="form-control" type="text" name="column" value="@TempData["NumColumn"]" hidden>
+
+    <input class="form-control" type="text" name="rowTwo" value="@TempData["NumRowTwo"]" hidden>
+    <input class="form-control" type="text" name="columnTwo" value="@TempData["NumColumnTwo"]" hidden>
+
+    <input class="form-control" type="text" name="fromDb" value="@TempData["fromDb"].ToString()" hidden>
+    @RenderBody()
+    <p>
+        <strong>Операции над матрицами</strong>
+        <select id="name-method" name="method" size="1" style="width: 200px">
+            <option value="SUM">Сложение</option>
+            <option value="SUB" selected>Вычитание</option>
+            <option value="MUL">Перемножение</option>
+        </select>
+    </p>
+    <a href="#" type="submit" id="solve1" name="STEP1" value="Назад" class="btn btn-lg btn-primary solve1" onclick="step2back()">Назад</a>
+    <input type="submit" id="solve2" name="STEP2" value="Далее" class="btn btn-lg btn-primary solve2" onclick="step2(this.form)" />
+</form>
+<script>
+    // отправка формы
+    $("form").submit(function (e) {
+        e.preventDefault();
+    });
+</script>
+

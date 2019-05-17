@@ -16,10 +16,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using StudLab.Data;
+using StudLab.Filters;
 using StudLab.Model;
 using StudLab.Model.Abstract;
 using StudLab.Models.Abstract;
 using StudLab.Models.Repositories;
+using StudLab.Models.TablesEntities;
 
 namespace StudLab
 {
@@ -69,7 +71,6 @@ namespace StudLab
 
             });
 
-
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -78,12 +79,16 @@ namespace StudLab
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            //Users DB
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(connectionString));
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(opt=>
+            {
+                opt.Filters.Add(new CustomActionFilter());
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 
             //----------AutoMapper----------------
@@ -95,10 +100,11 @@ namespace StudLab
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
-            services.AddTransient(typeof(AbstractTableRepository<TableTransportTask, TableTransportTask>), typeof(TransportRepository));
-            services.AddTransient(typeof(AbstractRepository<User, User>), typeof(UserRepository));
-
-
+            services.AddTransient(typeof(AbstractTableRepository<MultiCriteriaTask>), typeof(MultiCriteriaRepository));
+            services.AddTransient(typeof(AbstractTableRepository<TableTransportTask>), typeof(TransportRepository));
+            services.AddTransient(typeof(AbstractTableRepository<MatrixOperationTask>), typeof(MatrixOperationsRepository));
+            services.AddTransient(typeof(AbstractRepository<User>), typeof(UserRepository));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -114,6 +120,9 @@ namespace StudLab
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

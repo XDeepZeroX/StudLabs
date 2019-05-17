@@ -5,11 +5,13 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <p>Would you like to logout of IdentityServer?</p>
+            <b><p>Вы действительно хотите выйти ?</p></b>
+            <p>Если вы выйдите с данного сайта, это повлечет за собой 
+            выход со всех сервисов, где вы авторизованы с помощью AuthSLabs  </p>
             <form asp-action="Logout">
                 <fieldset>
                     <div class="form-group">
-                        <button class="btn btn-primary">Yes</button>
+                        <button class="btn btn-primary">Выход</button>
                     </div>
                 </fieldset>
             </form>

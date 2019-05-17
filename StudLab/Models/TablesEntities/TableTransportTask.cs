@@ -18,6 +18,9 @@ namespace StudLab.Model
             setVectors(data);
         }
 
+        [ForeignKey("TransportTask")]
+        public override int? UserId { get; set; }
+
         public string AVector { get; set; }
         public string BVector { get; set; }
         
@@ -44,7 +47,7 @@ namespace StudLab.Model
         {
             return BVector.Split(sep).Select(x => double.Parse(x)).ToList();
         }
-
+        
         public static bool operator ==(TableTransportTask This, TableTransportTask Other)
         {
             if(object.ReferenceEquals(This, null))
@@ -56,11 +59,14 @@ namespace StudLab.Model
             {
                 return false;
             }
-            return This.Table == Other.Table &&
+            //return This.Table == Other.Table &&
+            //    This.AVector == Other.AVector &&
+            //    This.BVector == Other.BVector &&
+            //    This.NumRow == Other.NumRow &&
+            //    This.NumColumn == Other.NumColumn;
+            return This == Other &&
                 This.AVector == Other.AVector &&
-                This.BVector == Other.BVector &&
-                This.NumRow == Other.NumRow &&
-                This.NumColumn == Other.NumColumn;
+                This.BVector == Other.BVector;
         }
         public static bool operator !=(TableTransportTask This, TableTransportTask Other)
         {

@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<StudLab.Model.TableTransportTask>
 @{ 
-    Layout = null;
+    Layout = TempData["layout"]?.ToString();
+    TempData["header-history"] = "История транспортной задачи";
 }
 
 @foreach (var item in Model)
@@ -8,7 +9,7 @@
 <div class="item-history" id="@item.Id" onclick="selectTable(@item.Id)">
     <table class="table-center">
         @{
-            var table = item.toList();
+            var table = item.ToList();
             var AVector = item.GetAVector();
             var BVector = item.GetBVector();
         }
@@ -46,7 +47,7 @@
                             {
                                 <tr><td><input class="form-control inputb" type="text" name="r@(i + 1)" value="@AVector[i]" disabled></td></tr>
                             }
-                            <tr><td class="form-control">&nbsp;</td></tr>
+                        <tr><td><input class="form-control inputb" type="text" name="temp" disabled></td></tr>
                         </tbody>
                     </table>
                 </td>

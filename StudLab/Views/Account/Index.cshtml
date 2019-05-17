@@ -1,10 +1,33 @@
 ﻿@model IEnumerable<StudLab.Model.TableTransportTask>
 
 @{
-    ViewData["Title"] = "Index";
+    string username = Context.User.Claims.FirstOrDefault(x => x.Type == "username")?.Value;
+    string AuthService = Context.User.Claims.FirstOrDefault(x => x.Type == "AuthService")?.Value;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="~/css/history.css" />
 
-<div class="tyt-content">
+<h4>Здравствуй, @username</h4>
+<!-- <div> -->
+<span>Твоя история операций на сайте, только выбери раздел:</span>
+<hr>
+<ul class="units d-flex flex-column">
+    <li><a href="#" data-controller="Transport">Транспортная задача</a></li>
+    <li><a href="#" data-controller="MultiCriteriaChoice">Многокритериальный выбор</a></li>
+    <li><a href="#" data-controller="MatrixOperations">Операции над матрицами</a></li>
+</ul>
+<hr>
+<i class="fas fa-info" style="margin:10px;"></i>
+@if (AuthService == "StudLabs")
+{
+    <span>
+        Если вы желаете сменить имя, перейдите по
+        <a href="#" style="border-bottom: 1px dashed #000080;">ссылке</a>
+    </span>
+}
+<div id="modal">
 
 </div>
+
+
+<script src="~/js/JavaScript.js"></script>

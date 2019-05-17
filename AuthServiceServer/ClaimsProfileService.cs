@@ -30,10 +30,15 @@ namespace AuthServiceServer
             var sub = context.Subject.GetSubjectId();
             var user = await _userManager.FindByIdAsync(sub);
             var principal = await _claimsFactory.CreateAsync(user);
+            var username = user.Login;
+            if (!String.IsNullOrEmpty(user.FirstName))
+                username = user.FirstName;
 
             var claims = principal.Claims.ToList();
             claims.Add(new Claim(JwtClaimTypes.GivenName, user.UserName));
             claims.Add(new Claim(IdentityServerConstants.StandardScopes.Email, user.Email));
+            claims.Add(new Claim("username", username));
+            claims.Add(new Claim("AuthService", "StudLabs"));
             context.IssuedClaims = claims;
         }
 

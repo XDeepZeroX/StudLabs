@@ -1,0 +1,36 @@
+﻿@model StudLab.Models.TablesEntities.MultiCriteriaTask
+@{
+    Layout = "_MultiCriteria";
+    var table = Model.ToList();
+
+    TempData["NumRow"] = Model.NumRow;
+    TempData["NumColumn"] = Model.NumColumn;
+
+    TempData["fromDb"] = true;
+}
+
+
+<input class="form-control" type="text" name="idTable" value="@Model.Id" hidden>
+<table class="table-center">
+    <tbody>
+        <tr>
+            <td align="center">
+                <b>Матрица</b>
+                <table>
+                    <tbody>
+                        @for (int i = 0; i < Model.NumRow; i++)
+                        {
+                            <tr>
+                                <td> </td>
+                                @for (int j = 0; j < Model.NumColumn; j++)
+                                {
+                                    <td><input class="form-control" type="text" name="matrixOne@(i+1)@(j + 1)" value="@table[i][j]"></td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
