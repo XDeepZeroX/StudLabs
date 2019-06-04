@@ -59,7 +59,6 @@ namespace StudLab
                 options.ResponseType = "code id_token"; // means Hybrid flow (id + access token)
                 options.Scope.Add("offline_access");
 
-
                 options.GetClaimsFromUserInfoEndpoint = true; //-
                 options.SaveTokens = true;
 
@@ -69,6 +68,11 @@ namespace StudLab
                     RoleClaimType = "role"
                 };
 
+            })
+            .AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:client_id"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:client_secret"];
             });
 
             string connectionString = Configuration.GetConnectionString("DefaultConnection");

@@ -7,6 +7,7 @@ using StudLab.Data;
 using StudLab.Model;
 using StudLab.Model.Abstract;
 using StudLab.Models.Abstract;
+using System.Security.Claims;
 
 namespace StudLab.Controllers.Abstract
 {
@@ -73,19 +74,22 @@ namespace StudLab.Controllers.Abstract
             if (emailUser != null)
             {
                 var user = _userRepository.GetFirst(x => x.EmailUser == emailUser);
-                if (user != null)
+                if (user != null) {
                     return user;
+                }
+                else{
+                    var newUser = new User(emailUser);
+                    if (_userRepository.Add(newUser))
+                        return newUser;
+                }
             }
-            var newUser = new User(emailUser);
-            if (_userRepository.Add(newUser))
-                return newUser;
             return null;
         }
         [NonAction]
         public string GetEmailUser()
         {
             var claims = HttpContext.User.Claims;
-            var email = claims.FirstOrDefault(x => x.Type == "email")?.Value;
+            var email = claims.FirstOrDefault(x => x.Type == "email" || x.Type == ClaimTypes.Email)?.Value;
             return email;
         }
         [NonAction]

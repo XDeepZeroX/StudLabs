@@ -1,19 +1,26 @@
 ﻿@{
-    var userName = Context.User.Claims.FirstOrDefault(x=>x.Type == "username")?.Value;
+    bool IsAuthorize = Context.User.Identity.IsAuthenticated;
+    string userName = Context.User.Claims.FirstOrDefault(x => x.Type == "username")?.Value;
     var userLink = "/Account";
     var userImg = "user.jpg";
-if (userName == null)
+
+    if (IsAuthorize && Context.User.Identity.AuthenticationType != "AuthenticationTypes.Federation")
     {
-        userName = "Anonymous";
-        userLink = "/Account/Anonymous";
-        userImg = "Anonim.jpg";
+        userName = Context.User.Identity.Name;
     }
     else
     {
-        userName = userName.Split('@')[0];
+        if (userName == null)
+        {
+            userName = "Anonymous";
+            userLink = "/Account/Anonymous";
+            userImg = "Anonim.jpg";
+        }
+        else
+        {
+            userName = userName.Split('@')[0];
+        }
     }
-
-    var privderOpenIdConnect = "OpenIdConnect";
 }
 <!DOCTYPE html>
 <html>
@@ -21,9 +28,6 @@ if (userName == null)
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudLabs</title>
-
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
-
     <!-- jQuery -->
     <script src="~/lib/jquery.js"></script>
     <!-- Bootstrap4 -->
@@ -54,20 +58,14 @@ if (userName == null)
     <!--NEW  -->
     <input type="checkbox" id="nav-toggle" hidden>
 
-    <nav class="navigation hover-menu">
+    <nav class="navigation hover-menu" data-step="2" data-intro='Это левая панель-меню, вы можете выбрать понравившийся вам раздел.'>
 
         <div class="container">
             <div class="menu-header">
-                @*<a href="#" class="col-12 name-company">
-                        <img src="~/images/testImage.png">
-                        <span class="name-section">Name Company</span>
-                    </a>*@
                 <a href="@userLink" class="col-12 name-user">
                     <img src="~/images/@userImg">
                     <span class="name-section">@userName</span>
                 </a>
-
-
             </div>
             <div class="navigation-collapse">
                 <ul id="menu">
@@ -89,6 +87,8 @@ if (userName == null)
                             <li><a href="/MatrixOperations">Операции <br />над матрицами</a></li>
                         </ul>
                     </li>
+                    @if (IsAuthorize)
+                    {
                     <hr />
                     <li>
                         <a href="/Account">
@@ -102,6 +102,7 @@ if (userName == null)
                             <span class="name-section">Выйти</span>
                         </a>
                     </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -113,23 +114,20 @@ if (userName == null)
         <div class="container-fluid row justify-content-between">
             <div class="navbar-wrapper">
                 <!-- <div class="nav-toggle"></div> -->
-                <label for="nav-toggle" class="nav-toggle" onclick></label>
+                <label for="nav-toggle" class="nav-toggle" data-step="1" data-intro='Вы можете развернуть левую панель-меню с помощью этой кнопки.'></label>
                 <a href="/" id="name-site">
                     <span>StudLabs</span>
                 </a>
             </div>
-            @if (!Context.User.Identity.IsAuthenticated)
+            @if (!IsAuthorize)
             {
                 <div class="header-content row d-none d-md-flex ">
-                    <ul class="icon">
+                    <ul class="icon" data-step="4" data-intro='Вы можете авторизоваться с помощью сторонних сервисов, просто кликните !'>
                         @*[0] = "OpenIdConnect"*@
 
-                        <li><a asp-controller="Account" asp-action="SingIn" asp-route-provider="@privderOpenIdConnect" class="fab fa-openid"></a></li>
-                        @*<li><a href="/Account/LoginOpenId" class="fab fa-openid"></a></li>*@
-                        <li><a href="#" class="fab fa-facebook-f no-openid"></a></li>
-                        @*<li><a href="#" class="fab fa-twitter no-openid"></a></li>*@
-                        @*<li><a href="#" class="fab fa-instagram no-openid"></a></li>*@
-                        <li><a href="#" class="fab fa-vk no-openid"></a></li>
+                        <li><a asp-controller="Account" asp-action="SingIn" asp-route-provider="OpenIdConnect" class="fab fa-openid"></a></li>
+                        @*<li><a href="#" class="fab fa-facebook-f no-openid"></a></li>*@
+                        <li><a asp-controller="Account" asp-action="SingIn" asp-route-provider="Google" class="fab fa-google-plus-g"></a></li>
                     </ul>
 
                 </div>
@@ -138,18 +136,6 @@ if (userName == null)
 
 
     </header>
-    <!-- The Modal -->
-    <div id="modal-dialog" class="modal">
-
-        <!-- Modal content -->
-        <div class="modal-content">
-            <div class="modal-header row justify-content-between">
-                <span>Создание записи</span>
-                <span class="close-modal">&times;</span>
-            </div>
-            <div class="modal-body"></div>
-        </div>
-    </div>
 
     <div id="page-layout" class="row n-navigation">
         <div id="page-body" class=" col-12">

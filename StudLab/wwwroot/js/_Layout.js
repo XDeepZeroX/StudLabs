@@ -16,12 +16,25 @@ $(document).ready(function () {
         $(this).addClass('active');
     });
     // MENU HOVER
-    $('.hover-menu').hover(()=>{
-        $('.hover-menu').animate({'width': '220px'},300);
-    }, ()=>{
-        if(!$('#nav-toggle').prop("checked")){
-            $('#menu li ul').slideUp(100);
-            $('.hover-menu').animate({'width': '70px'},100);
+    var isHover = false;
+    $('.hover-menu').hover(() => {
+        if (!isHover) {
+            $('.hover-menu').animate({ 'width': '220px' }, 50);
+            setTimeout(() => {
+                isHover = true;
+                //console.log(isHover);
+            }, 50);
+        }
+    }, () => {
+        if (isHover) {
+            if (!$('#nav-toggle').prop("checked")) {
+                $('#menu li ul').slideUp(100);
+                $('.hover-menu').animate({ 'width': '70px' }, 50);
+                setTimeout(() => {
+                    isHover = false;
+                    //console.log(isHover);
+                }, 50);
+            }
         }
     })
 

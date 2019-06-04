@@ -1,23 +1,30 @@
 ﻿<link rel="stylesheet" href="~/css/mainPage.css">
+<link rel="stylesheet" href="~/node_modules/intro.js/introjs.css"/>
+<script src="~/node_modules/intro.js/intro.js"></script>
+
 <div id="showcase" class="header">
     <h1>Добро пожаловать в StudLabs</h1>
     <p>Онлайн-калькулятор можно использовать для проверки своего решения <br />по математическим и экономическим дисциплинам.</p>
-    <a href="#" class="button">Начать</a>
+    <span class="button btn-start">Начать</span>
+    <a href="/Home/About" class="button"  data-step="3" data-intro="Тут вы можете посмотреть информацию о нас.">О нас</a>
 </div>
-@*<section id="section-a">
-    <p> wacher garcia e uma rapaz muito inteligente por isso gosta muito de fazer que coisa que vai agradar..</p>
-</section>
-<section id="section-b">
-    <p>Мы можем написать здесь все о том, что мы хотим, что вы думаете, КириллМы можем написать здесь все о том, что мы хотим, что вы думаете, КириллМы можем написать здесь все о том, что мы хотим, что вы думаете, КириллМы можем написать здесь все о том, что мы хотим, что вы думаете, КириллМы можем написать здесь все о том, что мы хотим, что вы думаете, КириллМы можем написать здесь все о том, что мы хотим, что вы думаете, КириллМы можем написать здесь все о том, что мы хотим, что вы думаете, Кирилл.</p>
-</section>
-<section id="section-c">
-    <div class="box-1">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dolorum est, molestias dolores quis sunt nobis temporibus veritatis libero odio!
-    </div>
-    <div class="box-2">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dolorum est, molestias dolores quis sunt nobis temporibus veritatis libero odio!
-    </div>
-    <div class="box-3">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dolorum est, molestias dolores quis sunt nobis temporibus veritatis libero odio!
-    </div>
-</section>*@
+
+<script>
+    $('.btn-start').click(() => {
+        introJs()
+            .setOption('skipLabel', "Пропустить")
+            .setOption('doneLabel', "Готово")
+            .setOption('nextLabel', "→")
+            .setOption('prevLabel', "←")
+            .onbeforechange(function (targetElement) {
+                console.log(targetElement);
+                console.log($('.hover-menu'))
+                console.log($('.hover-menu')[0] === targetElement)
+                if ($('.hover-menu')[0] === targetElement)
+                    $('.hover-menu').animate({ 'width': '220px' }, 50);
+                else
+                    $('.hover-menu').animate({ 'width': '70px' }, 50);
+            })
+            .start();
+    }); 
+</script>

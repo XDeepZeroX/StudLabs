@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Abstract\AbstarctController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\js\history.xaml" />
   </ItemGroup>
 
@@ -16,6 +20,17 @@
     <Content Include="wwwroot\node_modules\enjoyhint\Casino_Hand\casino_hand-webfont.woff" />
     <Content Include="wwwroot\node_modules\enjoyhint\enjoyhint.css" />
     <Content Include="wwwroot\node_modules\enjoyhint\package.json" />
+    <Content Include="wwwroot\node_modules\intro.js\introjs-rtl.css" />
+    <Content Include="wwwroot\node_modules\intro.js\introjs.css" />
+    <Content Include="wwwroot\node_modules\intro.js\minified\introjs-rtl.min.css" />
+    <Content Include="wwwroot\node_modules\intro.js\minified\introjs.min.css" />
+    <Content Include="wwwroot\node_modules\intro.js\package.json" />
+    <Content Include="wwwroot\node_modules\intro.js\themes\introjs-dark.css" />
+    <Content Include="wwwroot\node_modules\intro.js\themes\introjs-flattener.css" />
+    <Content Include="wwwroot\node_modules\intro.js\themes\introjs-modern.css" />
+    <Content Include="wwwroot\node_modules\intro.js\themes\introjs-nassim.css" />
+    <Content Include="wwwroot\node_modules\intro.js\themes\introjs-nazanin.css" />
+    <Content Include="wwwroot\node_modules\intro.js\themes\introjs-royal.css" />
     <Content Include="wwwroot\node_modules\izimodal\bower.json" />
     <Content Include="wwwroot\node_modules\izimodal\css\iziModal.css" />
     <Content Include="wwwroot\node_modules\izimodal\css\iziModal.min.css" />
@@ -122,6 +137,11 @@
     <None Include="wwwroot\node_modules\enjoyhint\Casino_Hand\casino_hand-webfont.svg" />
     <None Include="wwwroot\node_modules\enjoyhint\index.js" />
     <None Include="wwwroot\node_modules\enjoyhint\jquery.enjoyhint.js" />
+    <None Include="wwwroot\node_modules\intro.js\changelog.md" />
+    <None Include="wwwroot\node_modules\intro.js\intro.js" />
+    <None Include="wwwroot\node_modules\intro.js\license.md" />
+    <None Include="wwwroot\node_modules\intro.js\minified\intro.min.js" />
+    <None Include="wwwroot\node_modules\intro.js\README.md" />
     <None Include="wwwroot\node_modules\izimodal\js\iziModal.js" />
     <None Include="wwwroot\node_modules\izimodal\js\iziModal.min.js" />
     <None Include="wwwroot\node_modules\izimodal\LICENSE" />

@@ -2,7 +2,7 @@
 
 @{
     string username = Context.User.Claims.FirstOrDefault(x => x.Type == "username")?.Value;
-    string AuthService = Context.User.Claims.FirstOrDefault(x => x.Type == "AuthService")?.Value;
+    string AuthService = Context.User.Identity.AuthenticationType;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="~/css/history.css" />
@@ -16,10 +16,10 @@
     <li><a href="#" data-controller="MultiCriteriaChoice">Многокритериальный выбор</a></li>
     <li><a href="#" data-controller="MatrixOperations">Операции над матрицами</a></li>
 </ul>
-<hr>
-<i class="fas fa-info" style="margin:10px;"></i>
-@if (AuthService == "StudLabs")
+@if (AuthService == "AuthenticationTypes.Federation")
 {
+    <hr>
+    <i class="fas fa-info" style="margin:10px;"></i>
     <span>
         Если вы желаете сменить имя, перейдите по
         <a href="#" style="border-bottom: 1px dashed #000080;">ссылке</a>

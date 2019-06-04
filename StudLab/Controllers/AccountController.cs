@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
@@ -58,7 +59,7 @@ namespace StudLab.Controllers
         [NonAction]
         public User GetUser()
         {
-            var emailUser = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "email")?.Value;
+            var emailUser = HttpContext.User.Claims.FirstOrDefault(x => x.Type == "email" || x.Type == ClaimTypes.Email)?.Value;
             if (emailUser != null)
             {
                 var user = _repository.GetFirst(x => x.EmailUser == emailUser);

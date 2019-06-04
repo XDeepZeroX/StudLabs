@@ -91,18 +91,20 @@ namespace AuthServiceServer.Controllers
             if (ModelState.IsValid)
             {
                 User user = GetUser(model.Login);
-                var result = await _signInManager.PasswordSignInAsync(user.Email, model.Password, false, false);
-                if (result.Succeeded)
+                if (user != null)
                 {
-                    //var user = await _userManager.FindByNameAsync(model.Login);
-                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName));
-                    if(String.IsNullOrEmpty(model.ReturnUrl))
+                    var result = await _signInManager.PasswordSignInAsync(user.Email, model.Password, false, false);
+                    if (result.Succeeded)
                     {
-                        return Redirect("/Account");
+                        //var user = await _userManager.FindByNameAsync(model.Login);
+                        await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName));
+                        if (String.IsNullOrEmpty(model.ReturnUrl))
+                        {
+                            return Redirect("/Account");
+                        }
+                        return Redirect(model.ReturnUrl);
                     }
-                    return Redirect(model.ReturnUrl);
                 }
-
                 await _events.RaiseAsync(new UserLoginFailureEvent(model.Login, "invalid credentials"));
                 ModelState.AddModelError(string.Empty, "Неверное имя пользователя или пароль");
             }

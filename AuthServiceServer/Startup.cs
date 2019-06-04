@@ -120,7 +120,7 @@ namespace AuthServiceServer
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, InitDataService seed)
         {
             //Init DB Clients,Resources...
-            InitializeDatabase(app);
+            //InitializeDatabase(app);
 
 
             if (Environment.IsDevelopment())
@@ -144,7 +144,7 @@ namespace AuthServiceServer
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            seed.Init();
+            //seed.Init();
         }
 
         private void InitializeDatabase(IApplicationBuilder app)
